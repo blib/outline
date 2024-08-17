@@ -141,6 +141,9 @@ describe("#authenticationProviders.list", () => {
     expect(body.data[2].name).toBe("oidc");
     expect(body.data[2].isEnabled).toBe(false);
     expect(body.data[2].isConnected).toBe(false);
+    expect(body.data[2].name).toBe("adfs");
+    expect(body.data[2].isEnabled).toBe(false);
+    expect(body.data[2].isConnected).toBe(false);
   });
 
   it("should require authentication", async () => {

@@ -25,6 +25,7 @@ import Fix from "./decorators/Fix";
 import Length from "./validators/Length";
 
 // TODO: Avoid this hardcoding of plugins
+import ADFSClient from "plugins/adfs/server/adfs";
 import AzureClient from "plugins/azure/server/azure";
 import GoogleClient from "plugins/google/server/google";
 import OIDCClient from "plugins/oidc/server/oidc";
@@ -107,6 +108,8 @@ class AuthenticationProvider extends Model<
         return new AzureClient();
       case "oidc":
         return new OIDCClient();
+      case "adfs":
+        return new ADFSClient();
       default:
         return undefined;
     }

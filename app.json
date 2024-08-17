@@ -3,7 +3,13 @@
   "description": "Open source wiki and knowledge base for growing teams",
   "website": "https://www.getoutline.com/",
   "repository": "https://github.com/outline/outline",
-  "keywords": ["wiki", "team", "node", "markdown", "slack"],
+  "keywords": [
+    "wiki",
+    "team",
+    "node",
+    "markdown",
+    "slack"
+  ],
   "success_url": "/",
   "formation": {
     "web": {
@@ -107,6 +113,41 @@
     "OIDC_SCOPES": {
       "description": "Space separated auth scopes.",
       "value": "openid profile email",
+      "required": false
+    },
+    "ADFS_CLIENT_ID": {
+      "description": "To configure ADFS auth, you'll need Microsoft ADFS server. Redirect URI is https://<URL>/auth/adfs.callback",
+      "required": false
+    },
+    "ADFS_CLIENT_SECRET": {
+      "description": "",
+      "required": false
+    },
+    "ADFS_URI": {
+      "description": "ADFS server URI",
+      "required": false
+    },
+    "ADFS_USERNAME_CLAIM": {
+      "description": "Specify which claims to derive user information from. Supports any valid JSON path with the JWT payload",
+      "value": "email",
+      "required": false
+    },
+    "ADFS_DISPLAY_NAME": {
+      "description": "Display name for ADFS authentication",
+      "value": "ADFS Connect",
+      "required": false
+    },
+    "ADFS_SCOPES": {
+      "description": "Space separated auth scopes.",
+      "value": "openid profile email",
+      "required": false
+    },
+    "ADFS_RESOURCE": {
+      "description": "ADFS resource name.",
+      "required": false
+    },
+    "ADFS_DISABLE_REDIRECT": {
+      "description": "Prevent the app from automatically redirecting to the ADFS login page",
       "required": false
     },
     "SLACK_CLIENT_ID": {
