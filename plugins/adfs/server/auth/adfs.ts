@@ -13,7 +13,6 @@ import {
 import passportMiddleware from "@server/middlewares/passport";
 import { User } from "@server/models";
 import { AuthenticationResult } from "@server/types";
-import { getJWTPayload } from "@server/utils/jwt";
 import {
   StateStore,
   getTeamFromContext,
@@ -78,7 +77,7 @@ if (env.ADFS_CLIENT_ID && env.ADFS_CLIENT_SECRET && env.ADFS_URI) {
         ) => void
       ) {
         try {
-          const profile = getJWTPayload(accessToken);
+          const profile = _profile as Record<string, string>;
 
           if (!profile.email) {
             throw AuthenticationError(
