@@ -52,6 +52,7 @@ if (env.ADFS_CLIENT_ID && env.ADFS_CLIENT_SECRET && env.ADFS_URI) {
         callbackURL: `${env.URL}/auth/${config.id}.callback`,
         scope: env.ADFS_SCOPES,
         resource: env.ADFS_RESOURCE,
+        passReqToCallback: true,
 
         // @ts-expect-error custom state store
         store: new StateStore(),
