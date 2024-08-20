@@ -162,7 +162,7 @@
     "outline-icons": "^3.6.0",
     "oy-vey": "^0.12.1",
     "passport": "^0.7.0",
-    "passport-adfs": "^0.0.3",
+    "passport-adfs": "^0.0.4",
     "passport-google-oauth2": "^0.2.0",
     "passport-oauth2": "^1.8.0",
     "passport-slack-oauth2": "^1.2.0",
