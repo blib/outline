@@ -33,6 +33,7 @@ class ADFSPluginEnvironment extends Environment {
   /**
    * The ADFS authorization endpoint.
    */
+  @Public
   @IsOptional()
   @IsUrl({
     require_tld: false,
@@ -66,7 +67,6 @@ class ADFSPluginEnvironment extends Environment {
   /**
    * ADFS resource id
    */
-  @Public
   @IsOptional()
   public ADFS_RESOURCE = environment.ADFS_RESOURCE ?? "outline";
 }
