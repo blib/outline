@@ -304,44 +304,39 @@ export default class AuthStore extends Store<Team> {
   logout = async (savePath = false, tryRevokingToken = true) => {
     // if this logout was forced from an authenticated route then
     // save the current path so we can go back there once signed in
-    this.isFetching = true;
-    try {
-      if (savePath) {
-        setPostLoginPath(window.location.pathname);
+    if (savePath) {
+      setPostLoginPath(window.location.pathname);
+    }
+
+    if (tryRevokingToken) {
+      try {
+        // invalidate authentication token on server and unset auth cookie
+        await client.post(`/auth.delete`);
+      } catch (err) {
+        Logger.error("Failed to delete authentication", err);
       }
+    }
 
-      if (tryRevokingToken) {
-        try {
-          // invalidate authentication token on server and unset auth cookie
-          await client.post(`/auth.delete`);
-        } catch (err) {
-          Logger.error("Failed to delete authentication", err);
-        }
-      }
+    // remove session record on apex cookie
+    const team = this.team;
 
-      // remove session record on apex cookie
-      const team = this.team;
+    if (team) {
+      const sessions = JSON.parse(getCookie("sessions") || "{}");
+      delete sessions[team.id];
+      setCookie("sessions", JSON.stringify(sessions), {
+        domain: getCookieDomain(window.location.hostname, isCloudHosted),
+      });
+    }
 
-      if (team) {
-        const sessions = JSON.parse(getCookie("sessions") || "{}");
-        delete sessions[team.id];
-        setCookie("sessions", JSON.stringify(sessions), {
-          domain: getCookieDomain(window.location.hostname, isCloudHosted),
-        });
-      }
+    // clear all credentials from cache (and local storage via autorun)
+    this.currentUserId = null;
+    this.currentTeamId = null;
+    this.collaborationToken = null;
+    this.rootStore.clear();
 
-      // clear all credentials from cache (and local storage via autorun)
-      this.currentUserId = null;
-      this.currentTeamId = null;
-      this.collaborationToken = null;
-      this.rootStore.clear();
-
-      // Tell the host application we logged out, if any – allows window cleanup.
-      if (Desktop.isElectron()) {
-        void Desktop.bridge?.onLogout?.();
-      }
-    } finally {
-      this.isFetching = false;
+    // Tell the host application we logged out, if any – allows window cleanup.
+    if (Desktop.isElectron()) {
+      void Desktop.bridge?.onLogout?.();
     }
   };
 }
