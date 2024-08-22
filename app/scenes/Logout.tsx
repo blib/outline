@@ -15,6 +15,13 @@ const Logout = () => {
     }
   });
 
+  if (env.OIDC_LOGOUT_URI) {
+    return null; // user will be redirected to logout URI after logout
+  }
+  if (env.ADFS_URI) {
+    return null; // user will be redirected to logout URI after logout
+  }
+
   return <Redirect to="/" />;
 };
 
