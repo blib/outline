@@ -9,12 +9,22 @@ const Logout = () => {
   void auth.logout().then(() => {
     if (env.OIDC_LOGOUT_URI) {
       setTimeout(() => {
-        window.location.replace(env.OIDC_LOGOUT_URI);
+        window.location.replace(
+          `${env.OIDC_LOGOUT_URI}?post_logout_redirect_uri=${encodeURIComponent(
+            env.URL
+          )}`
+        );
       }, 200);
     }
     if (env.ADFS_URI) {
       setTimeout(() => {
-        window.location.replace(env.ADFS_URI + "/adfs/oauth2/logout");
+        window.location.replace(
+          `${
+            env.ADFS_URI
+          }/adfs/oauth2/logout?post_logout_redirect_uri=${encodeURIComponent(
+            env.URL
+          )}`
+        );
       }, 200);
     }
   });
