@@ -2,6 +2,10 @@
 // locales array in shared/utils/date.ts to enable translation for timestamps.
 export const languageOptions = [
   {
+    label: "Русский (Russian)",
+    value: "ru_RU",
+  },
+  {
     label: "English (US)",
     value: "en_US",
   },
