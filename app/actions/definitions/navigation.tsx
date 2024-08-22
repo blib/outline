@@ -216,10 +216,14 @@ export const logout = createAction({
   perform: async () => {
     await stores.auth.logout();
     if (env.OIDC_LOGOUT_URI) {
-      window.location.replace(env.OIDC_LOGOUT_URI);
+      setTimeout(() => {
+        window.location.replace(env.OIDC_LOGOUT_URI);
+      }, 200);
     }
     if (env.ADFS_URI) {
-      window.location.replace(env.ADFS_URI + "/adfs/oauth2/logout");
+      setTimeout(() => {
+        window.location.replace(env.ADFS_URI + "/adfs/oauth2/logout");
+      }, 200);
     }
   },
 });
