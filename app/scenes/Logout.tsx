@@ -8,14 +8,14 @@ const Logout = () => {
 
   void auth.logout().then(() => {
     if (env.OIDC_LOGOUT_URI) {
-      window.requestAnimationFrame(() => {
+      setTimeout(() => {
         window.location.replace(env.OIDC_LOGOUT_URI);
-      });
+      }, 200);
     }
     if (env.ADFS_URI) {
-      window.requestAnimationFrame(() => {
+      setTimeout(() => {
         window.location.replace(`${env.ADFS_URI}/adfs/oauth2/logout`);
-      });
+      }, 200);
     }
   });
 
